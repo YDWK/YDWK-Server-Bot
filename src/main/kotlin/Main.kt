@@ -1,7 +1,10 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+import handler.SlashHandler
+import io.github.realyusufismail.jconfig.util.JConfigUtils
+import io.github.ydwk.ydwk.YDWK
+import io.github.ydwk.ydwk.createDefaultBot
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+fun main() {
+    val token = JConfigUtils.getString("token") ?: throw Exception("Token not found")
+    val ydwk : YDWK = createDefaultBot(token)
+    ydwk.waitForReady.addEvent(SlashHandler(ydwk))
 }
