@@ -1,6 +1,6 @@
 package handler
 
-import io.github.ydwk.ydwk.event.events.interaction.SlashCommandEvent
+import io.github.ydwk.ydwk.evm.event.events.interaction.SlashCommandEvent
 
 interface SlashCommandExtender {
 

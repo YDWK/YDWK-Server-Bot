@@ -1,12 +1,12 @@
 package commands
 
 import handler.SlashCommandExtender
-import io.github.ydwk.ydwk.event.events.interaction.SlashCommandEvent
+import io.github.ydwk.ydwk.evm.event.events.interaction.SlashCommandEvent
 
 class UptimeCommand : SlashCommandExtender {
 
     override fun onSlashCommand(event: SlashCommandEvent) {
-        event.slash.channel?.asGuildTextChannel()?.sendMessage("Uptime: ${event.ydwk.uptime}ms")?.get()
+        event.slash.channel?.sendMessage("Uptime: ${event.ydwk.uptime}ms")?.get()
     }
 
     override val name: String
