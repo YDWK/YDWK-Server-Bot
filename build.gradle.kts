@@ -10,11 +10,10 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
-    maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
 }
 
 dependencies {
-    implementation("io.github.realyusufismail:ydwk:0.0.3-SNAPSHOT")
+    implementation("io.github.realyusufismail:ydwk:0.0.8")
     testImplementation(kotlin("test"))
 }
 

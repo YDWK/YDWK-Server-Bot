@@ -2,7 +2,7 @@ package handler
 
 import io.github.ydwk.ydwk.YDWK
 import io.github.ydwk.ydwk.evm.ListenerAdapter
-import io.github.ydwk.ydwk.evm.event.events.interaction.SlashCommandEvent
+import io.github.ydwk.ydwk.evm.event.events.interaction.slash.SlashCommandEvent
 import io.github.ydwk.ydwk.slash.Slash
 
 class SlashHandler(private val ydwk : YDWK) : ListenerAdapter() {

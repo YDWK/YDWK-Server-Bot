@@ -1,12 +1,12 @@
 package commands
 
 import handler.SlashCommandExtender
-import io.github.ydwk.ydwk.evm.event.events.interaction.SlashCommandEvent
+import io.github.ydwk.ydwk.evm.event.events.interaction.slash.SlashCommandEvent
 
 class UptimeCommand : SlashCommandExtender {
 
     override fun onSlashCommand(event: SlashCommandEvent) {
-        event.slash.reply("Uptime: ${event.slash.ydwk.uptime}ms").get()
+        event.slash.reply("Uptime: ${event.slash.ydwk.uptime}ms").reply()
     }
 
     override val name: String
