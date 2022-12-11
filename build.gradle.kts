@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.7.20"
+    kotlin("jvm") version "1.7.22"
     application
 }
 
@@ -10,11 +10,10 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
-    maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
 }
 
 dependencies {
-    implementation("io.github.realyusufismail:ydwk:0.0.3-SNAPSHOT")
+    implementation("io.github.realyusufismail:ydwk:0.0.8")
     testImplementation(kotlin("test"))
 }
 
@@ -27,5 +26,5 @@ tasks.withType<KotlinCompile> {
 }
 
 application {
-    mainClass.set("MainKt")
+    mainClass.set("Main")
 }
