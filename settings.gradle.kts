@@ -1,1 +1,1 @@
-rootProject.name = "SampleBot"
+rootProject.name = "YDWK-Server-Bot"
