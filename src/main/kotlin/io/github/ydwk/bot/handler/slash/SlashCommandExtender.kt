@@ -19,14 +19,17 @@
 package io.github.ydwk.bot.handler.slash
 
 import io.github.ydwk.ydwk.interaction.application.type.SlashCommand
+import io.github.ydwk.ydwk.slash.SlashOption
 
 interface SlashCommandExtender {
 
     fun onSlashCommand(event: SlashCommand)
 
-    val name: String
+    fun name(): String
 
-    val description: String
+    fun description(): String
 
-    val isGuildOnly: Boolean
+    fun isGuildOnly(): Boolean
+
+    fun options(): MutableList<SlashOption> = mutableListOf()
 }

@@ -48,14 +48,11 @@ class UptimeCommand : SlashCommandExtender {
             .reply()
     }
 
-    override val name: String
-        get() = "uptime"
+    override fun name(): String = "uptime"
 
-    override val description: String
-        get() = "Get the uptime of the bot"
+    override fun description(): String = "Get the uptime of the bot"
 
-    override val isGuildOnly: Boolean
-        get() = false
+    override fun isGuildOnly(): Boolean = false
 
     private fun formatUptime(duration: Duration): String {
         val days = duration.toDays()

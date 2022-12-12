@@ -18,4 +18,61 @@
  */ 
 package io.github.ydwk.bot.commands.moderation
 
-class BanCommand {}
+import io.github.ydwk.bot.handler.slash.SlashCommandExtender
+import io.github.ydwk.ydwk.entities.User
+import io.github.ydwk.ydwk.entities.guild.Member
+import io.github.ydwk.ydwk.entities.guild.enums.GuildPermission
+import io.github.ydwk.ydwk.interaction.application.type.SlashCommand
+import io.github.ydwk.ydwk.slash.SlashOption
+import io.github.ydwk.ydwk.slash.SlashOptionType
+
+class BanCommand : SlashCommandExtender {
+    override fun onSlashCommand(event: SlashCommand) {
+        val member: Member = event.member!!
+        val bot: Member = event.guild?.botAsMember ?: return
+
+        if (!member.hasPermission(GuildPermission.BAN_MEMBERS)) {
+            event.reply("You do not have permission to ban members.").isEphemeral(true).reply()
+            return
+        }
+
+        if (!bot.hasPermission(GuildPermission.BAN_MEMBERS)) {
+            event.reply("I do not have permission to ban members.").isEphemeral(true).reply()
+            return
+        }
+
+        val user: User? = event.getOption("user")?.asUser
+        if (user == null) {
+            event.reply("You must provide a user to ban.").isEphemeral(true).reply()
+            return
+        }
+
+        val reason: String? = event.getOption("reason")?.asString
+        if (reason == null) {
+            event.reply("You must provide a reason to ban.").isEphemeral(true).reply()
+            return
+        }
+
+        event.guild!!.banUser(user.id, reason).completeAsync {
+            event.reply("Banned ${user.name}#${user.discriminator} for $reason.").reply()
+        }
+    }
+
+    override fun name(): String {
+        return "ban"
+    }
+
+    override fun description(): String {
+        return "Ban a user from the server"
+    }
+
+    override fun isGuildOnly(): Boolean {
+        return true
+    }
+
+    override fun options(): MutableList<SlashOption> {
+        return mutableListOf(
+            SlashOption("user", "The user to ban", SlashOptionType.USER, true),
+            SlashOption("reason", "The reason for the ban", SlashOptionType.STRING, true))
+    }
+}

@@ -30,9 +30,11 @@ open class SlashHandler(private val ydwk: YDWK) : ListenerAdapter() {
     private fun addSlashCommands(command: SlashCommandExtender) {
         slashCommand[command.name] = command
         if (command.isGuildOnly) {
-            slashMutableList.add(Slash(command.name, command.description, true))
+            slashMutableList.add(
+                Slash(command.name, command.description, true).addOptions(command.options))
         } else {
-            slashMutableList.add(Slash(command.name, command.description, false))
+            slashMutableList.add(
+                Slash(command.name, command.description, false).addOptions(command.options))
         }
     }
 

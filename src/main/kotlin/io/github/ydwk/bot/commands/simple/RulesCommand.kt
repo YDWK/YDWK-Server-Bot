@@ -65,10 +65,9 @@ class RulesCommand : SlashCommandExtender {
             .setColor(defaultColor)
     }
 
-    override val name: String
-        get() = "rules"
-    override val description: String
-        get() = "Get the rules of the server"
-    override val isGuildOnly: Boolean
-        get() = true
+    override fun name(): String = "rules"
+
+    override fun description(): String = "Get the rules of the server"
+
+    override fun isGuildOnly(): Boolean = true
 }
