@@ -83,3 +83,10 @@
 | |____  | (_) | | | | | | | | | |  __/ | (__  | |_  |  __/ | (_| |   | |_  | (_) |      | |    | |__| |    \  /\  /    | . \ 
  \_____|  \___/  |_| |_| |_| |_|  \___|  \___|  \__|  \___|  \__,_|    \__|  \___/       |_|    |_____/      \/  \/     |_|\_\
 2022/02/12 18:02:09 {DefaultDispatcher-worker-1} [INFO] Main: Bot is ready
+2022/38/12 18:38:29 {ReadingThread} [ERROR] io.github.ydwk.ydwk.ws.WebSocketManager: IO error Connection reset
+2022/38/12 18:38:29 {WritingThread} [ERROR] io.github.ydwk.ydwk.ws.WebSocketManager: IO error Connection or outbound has closed
+2022/38/12 18:38:29 {WritingThread} [ERROR] io.github.ydwk.ydwk.ws.WebSocketManager: IO error Connection or outbound has closed
+2022/38/12 18:38:29 {WritingThread} [INFO] io.github.ydwk.ydwk.ws.WebSocketManager: Disconnected from websocket with close code TERMINATION (1008) and reason An I/O error occurred while a frame was being read from the web socket: Connection reset
+2022/38/12 18:38:30 {WritingThread} [INFO] io.github.ydwk.ydwk.ws.WebSocketManager: Not able to reconnect to websocket, shutting down
+2022/38/12 18:38:30 {WritingThread} [INFO] io.github.ydwk.ydwk.impl.YDWKImpl: Timeout for 2972 then shutting down
+2022/38/12 18:38:32 {WritingThread} [INFO] io.github.ydwk.ydwk.ws.WebSocketManager: Shutting down gateway
