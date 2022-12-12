@@ -60,7 +60,8 @@ class RulesCommand : SlashCommandExtender {
             Discord Terms of Service Apply: https://discord.com/terms
             Discord Community Guidelines Apply: https://discord.com/guidelines
             Discord Privacy Policy Applies: https://discord.com/privacy
-        """.trimIndent())
+        """
+                    .trimIndent())
             .setColor(defaultColor)
     }
 

@@ -42,7 +42,8 @@ class UptimeCommand : SlashCommandExtender {
         val formattedUptime = formatUptime(duration)
 
         // send the message
-        event.reply("Uptime: $formattedUptime")
+        event
+            .reply("Uptime: $formattedUptime")
             .addActionRow(ActionRow.of(Button.of(ButtonStyle.DANGER, "delete", "Delete")))
             .reply()
     }
