@@ -7,14 +7,15 @@ plugins {
     jacoco // code coverage reports
 }
 
-group = "io.github.ydwk.samplebot"
+group = "io.github.ydwk.bot"
 
 version = "1.0-SNAPSHOT"
 
 repositories { mavenCentral() }
 
 dependencies {
-    implementation("io.github.realyusufismail:ydwk:0.0.8")
+    implementation("io.github.realyusufismail:ydwk:0.0.9")
+    implementation("io.github.classgraph:classgraph:4.8.152")
     testImplementation(kotlin("test"))
 }
 
@@ -39,7 +40,7 @@ spotless {
     kotlin {
         // Excludes build folder since it contains generated java classes.
         targetExclude("build/**")
-        ktfmt("0.39").dropboxStyle()
+        ktfmt("0.42").dropboxStyle()
 
         licenseHeader(
             """/*

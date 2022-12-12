@@ -16,23 +16,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */ 
-package commands
+package io.github.ydwk.bot.commands.util
 
-import handler.SlashCommandExtender
-import io.github.ydwk.ydwk.evm.event.events.interaction.slash.SlashCommandEvent
+import java.awt.Color
 
-class UptimeCommand : SlashCommandExtender {
-
-    override fun onSlashCommand(event: SlashCommandEvent) {
-        event.slash.reply("Uptime: ${event.slash.ydwk.uptime}ms").reply()
-    }
-
-    override val name: String
-        get() = "uptime"
-
-    override val description: String
-        get() = "Get the uptime of the bot"
-
-    override val isGuildOnly: Boolean
-        get() = false
-}
+// rgb
+val defaultColor = Color(85, 17, 238)

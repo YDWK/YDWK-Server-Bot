@@ -16,20 +16,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */ 
-package handler
+package io.github.ydwk.bot.handler.slash
 
 import io.github.ydwk.ydwk.YDWK
 import io.github.ydwk.ydwk.evm.ListenerAdapter
 import io.github.ydwk.ydwk.evm.event.events.interaction.slash.SlashCommandEvent
 import io.github.ydwk.ydwk.slash.Slash
 
-class SlashHandler(private val ydwk: YDWK) : ListenerAdapter() {
+open class SlashHandler(private val ydwk: YDWK) : ListenerAdapter() {
     private val slashCommand: MutableMap<String, SlashCommandExtender> = HashMap()
     private val slashMutableList: MutableList<Slash> = ArrayList()
-
-    init {
-        ydwk.slashBuilder.getSlashCommands()
-    }
 
     private fun addSlashCommands(command: SlashCommandExtender) {
         slashCommand[command.name] = command
@@ -51,6 +47,6 @@ class SlashHandler(private val ydwk: YDWK) : ListenerAdapter() {
 
     override fun onSlashCommand(event: SlashCommandEvent) {
         val cmd: SlashCommandExtender = slashCommand[event.slash.name] ?: return
-        cmd.onSlashCommand(event)
+        cmd.onSlashCommand(event.slash)
     }
 }

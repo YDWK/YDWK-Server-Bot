@@ -16,8 +16,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */ 
-import handler.SlashHandler
+package io.github.ydwk.bot
+
 import io.github.realyusufismail.jconfig.util.JConfigUtils
+import io.github.ydwk.bot.handler.button.ButtonHandler
+import io.github.ydwk.bot.handler.slash.AutoSlashAdder
 import io.github.ydwk.ydwk.BotBuilder.createDefaultBot
 import io.github.ydwk.ydwk.YDWK
 import io.github.ydwk.ydwk.evm.backend.event.on
@@ -30,6 +33,8 @@ val logger: Logger = LoggerFactory.getLogger("Main")
 fun main() {
     val token = JConfigUtils.getString("token") ?: throw Exception("Token not found")
     val ydwk: YDWK = createDefaultBot(token).build()
-    ydwk.waitForReady.addEvent(SlashHandler(ydwk))
+
     ydwk.on<ReadyEvent> { logger.info("Bot is ready") }
+
+    ydwk.waitForReady.addEvent(AutoSlashAdder(ydwk), ButtonHandler())
 }

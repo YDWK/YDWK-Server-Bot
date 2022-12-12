@@ -16,17 +16,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */ 
-package handler
+package io.github.ydwk.bot.commands.moderation
 
-import io.github.ydwk.ydwk.evm.event.events.interaction.slash.SlashCommandEvent
-
-interface SlashCommandExtender {
-
-    fun onSlashCommand(event: SlashCommandEvent)
-
-    val name: String
-
-    val description: String
-
-    val isGuildOnly: Boolean
-}
+class BanCommand {}
