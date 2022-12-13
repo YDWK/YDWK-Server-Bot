@@ -46,5 +46,6 @@ private fun ClassGraph.acceptPackages(acceptedPackages: List<String>): ClassGrap
 
 fun acceptedPackages(): List<String> {
     val mainPackageName = "io.github.ydwk.bot.commands"
-    return listOf("$mainPackageName.simple, $mainPackageName.moderation")
+    val subPackages = listOf("simple", "moderation")
+    return listOf(mainPackageName) + subPackages.map { "$mainPackageName.$it" }
 }

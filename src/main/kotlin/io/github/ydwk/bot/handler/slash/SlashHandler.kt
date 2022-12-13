@@ -28,13 +28,17 @@ open class SlashHandler(private val ydwk: YDWK) : ListenerAdapter() {
     private val slashMutableList: MutableList<Slash> = ArrayList()
 
     private fun addSlashCommands(command: SlashCommandExtender) {
-        slashCommand[command.name] = command
-        if (command.isGuildOnly) {
+        if (command.name().isEmpty()) {
+            throw IllegalArgumentException("SlashCommandExtender name cannot be null")
+        }
+
+        slashCommand[command.name()] = command
+        if (command.isGuildOnly()) {
             slashMutableList.add(
-                Slash(command.name, command.description, true).addOptions(command.options))
+                Slash(command.name(), command.description(), true).addOptions(command.options()))
         } else {
             slashMutableList.add(
-                Slash(command.name, command.description, false).addOptions(command.options))
+                Slash(command.name(), command.description(), false).addOptions(command.options()))
         }
     }
 
