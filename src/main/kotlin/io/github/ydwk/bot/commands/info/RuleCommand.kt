@@ -16,13 +16,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */ 
-package io.github.ydwk.bot.commands.simple
+package io.github.ydwk.bot.commands.info
 
 import io.github.ydwk.bot.commands.util.defaultColor
 import io.github.ydwk.bot.handler.slash.SlashCommandExtender
 import io.github.ydwk.ydwk.interaction.application.type.SlashCommand
 
-class RulesCommand : SlashCommandExtender {
+class RuleCommand : SlashCommandExtender {
     override fun onSlashCommand(event: SlashCommand) {
         val embed = event.ydwk.embedBuilder
         embed.setTitle("YDWK Rules")
@@ -63,11 +63,19 @@ class RulesCommand : SlashCommandExtender {
         """
                     .trimIndent())
             .setColor(defaultColor)
+
+        event.reply(embed.build()).reply()
     }
 
-    override fun name(): String = "rules"
+    override fun name(): String {
+        return "rule"
+    }
 
-    override fun description(): String = "Get the rules of the server"
+    override fun description(): String {
+        return "Get the rules of the server"
+    }
 
-    override fun isGuildOnly(): Boolean = true
+    override fun isGuildOnly(): Boolean {
+        return true
+    }
 }

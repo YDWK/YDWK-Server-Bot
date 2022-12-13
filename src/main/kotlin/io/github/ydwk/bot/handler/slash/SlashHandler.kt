@@ -18,6 +18,7 @@
  */ 
 package io.github.ydwk.bot.handler.slash
 
+import io.github.ydwk.bot.logger
 import io.github.ydwk.ydwk.YDWK
 import io.github.ydwk.ydwk.evm.ListenerAdapter
 import io.github.ydwk.ydwk.evm.event.events.interaction.slash.SlashCommandEvent
@@ -52,7 +53,12 @@ open class SlashHandler(private val ydwk: YDWK) : ListenerAdapter() {
     }
 
     override fun onSlashCommand(event: SlashCommandEvent) {
-        val cmd: SlashCommandExtender = slashCommand[event.slash.name] ?: return
-        cmd.onSlashCommand(event.slash)
+        logger.debug("SlashCommand: ${event.slash.name}")
+        slashCommand.forEach { (name, cmd) ->
+            if (name == event.slash.name) {
+                logger.debug("SlashCommand: ${cmd.name()}")
+                cmd.onSlashCommand(event.slash)
+            }
+        }
     }
 }

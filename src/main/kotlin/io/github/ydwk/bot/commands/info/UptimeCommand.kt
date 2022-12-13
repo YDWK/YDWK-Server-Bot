@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */ 
-package io.github.ydwk.bot.commands.simple
+package io.github.ydwk.bot.commands.info
 
 import io.github.ydwk.bot.handler.slash.SlashCommandExtender
 import io.github.ydwk.ydwk.interaction.application.type.SlashCommand
@@ -48,11 +48,17 @@ class UptimeCommand : SlashCommandExtender {
             .reply()
     }
 
-    override fun name(): String = "uptime"
+    override fun name(): String  {
+        return "uptime"
+    }
 
-    override fun description(): String = "Get the uptime of the bot"
+    override fun description(): String {
+        return "Get the uptime of the bot"
+    }
 
-    override fun isGuildOnly(): Boolean = false
+    override fun isGuildOnly(): Boolean {
+        return false
+    }
 
     private fun formatUptime(duration: Duration): String {
         val days = duration.toDays()

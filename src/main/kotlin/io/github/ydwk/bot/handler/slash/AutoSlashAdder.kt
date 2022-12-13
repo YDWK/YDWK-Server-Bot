@@ -41,11 +41,14 @@ class AutoSlashAdder(ydwk: YDWK) : SlashHandler(ydwk) {
 }
 
 private fun ClassGraph.acceptPackages(acceptedPackages: List<String>): ClassGraph {
-    return this.acceptPackages(*acceptedPackages.toTypedArray())
+   for (acceptedPackage in acceptedPackages) {
+       acceptPackages(acceptedPackage)
+   }
+    return this
 }
 
 fun acceptedPackages(): List<String> {
     val mainPackageName = "io.github.ydwk.bot.commands"
-    val subPackages = listOf("simple", "moderation")
+    val subPackages = listOf("info", "moderation")
     return listOf(mainPackageName) + subPackages.map { "$mainPackageName.$it" }
 }
