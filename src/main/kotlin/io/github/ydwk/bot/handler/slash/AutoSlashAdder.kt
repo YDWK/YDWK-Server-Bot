@@ -37,6 +37,7 @@ class AutoSlashAdder(ydwk: YDWK) : SlashHandler(ydwk) {
 
     init {
         registerSlashCommands(loadCommands().map { it.getConstructor().newInstance() })
+            .sendSlash()
     }
 }
 

@@ -29,7 +29,7 @@ import io.github.ydwk.ydwk.slash.SlashOptionType
 class BanCommand : SlashCommandExtender {
     override fun onSlashCommand(event: SlashCommand) {
         val member: Member = event.member!!
-        val bot: Member = event.guild?.botAsMember ?: return
+        val bot: Member = event.ydwk.getMemberById(event.guild?.id!!, event.ydwk.bot?.id!!)!!
 
         if (!member.hasPermission(GuildPermission.BAN_MEMBERS)) {
             event.reply("You do not have permission to ban members.").isEphemeral(true).reply()

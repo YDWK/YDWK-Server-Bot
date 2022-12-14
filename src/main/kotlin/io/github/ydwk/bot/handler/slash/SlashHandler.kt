@@ -43,20 +43,22 @@ open class SlashHandler(private val ydwk: YDWK) : ListenerAdapter() {
         }
     }
 
-    fun registerSlashCommands(slashCommands: Collection<SlashCommandExtender>) {
+    fun registerSlashCommands(slashCommands: Collection<SlashCommandExtender>) :SlashHandler {
         slashCommands.forEach { addSlashCommands(it) }
-        onFirstSlash()
+        return this
     }
 
-    private fun onFirstSlash() {
-        slashMutableList.forEach { ydwk.slashBuilder.addSlashCommand(it).build() }
+    fun sendSlash() {
+        if (slashMutableList.isNotEmpty()) {
+            ydwk.slashBuilder.addSlashCommands(slashMutableList).build()
+        } else {
+            logger.warn("No slash commands registered")
+        }
     }
 
     override fun onSlashCommand(event: SlashCommandEvent) {
-        logger.debug("SlashCommand: ${event.slash.name}")
         slashCommand.forEach { (name, cmd) ->
             if (name == event.slash.name) {
-                logger.debug("SlashCommand: ${cmd.name()}")
                 cmd.onSlashCommand(event.slash)
             }
         }
