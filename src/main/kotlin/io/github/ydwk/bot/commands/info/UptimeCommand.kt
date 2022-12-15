@@ -48,7 +48,7 @@ class UptimeCommand : SlashCommandExtender {
             .reply()
     }
 
-    override fun name(): String  {
+    override fun name(): String {
         return "uptime"
     }
 

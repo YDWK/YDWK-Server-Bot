@@ -14,7 +14,7 @@ version = "1.0-SNAPSHOT"
 repositories { mavenCentral() }
 
 dependencies {
-    implementation("io.github.realyusufismail:ydwk:0.1.0")
+    implementation("io.github.realyusufismail:ydwk:0.1.1")
     implementation("io.github.classgraph:classgraph:4.8.152")
     testImplementation(kotlin("test"))
 }
@@ -65,7 +65,7 @@ spotless {
 
     kotlinGradle {
         target("**/*.gradle.kts")
-        ktfmt("0.39").dropboxStyle()
+        ktfmt("0.42").dropboxStyle()
         trimTrailingWhitespace()
         indentWithSpaces()
         endWithNewline()

@@ -43,7 +43,7 @@ open class SlashHandler(private val ydwk: YDWK) : ListenerAdapter() {
         }
     }
 
-    fun registerSlashCommands(slashCommands: Collection<SlashCommandExtender>) :SlashHandler {
+    fun registerSlashCommands(slashCommands: Collection<SlashCommandExtender>): SlashHandler {
         slashCommands.forEach { addSlashCommands(it) }
         return this
     }

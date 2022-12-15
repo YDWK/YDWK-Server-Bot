@@ -36,15 +36,14 @@ class AutoSlashAdder(ydwk: YDWK) : SlashHandler(ydwk) {
     }
 
     init {
-        registerSlashCommands(loadCommands().map { it.getConstructor().newInstance() })
-            .sendSlash()
+        registerSlashCommands(loadCommands().map { it.getConstructor().newInstance() }).sendSlash()
     }
 }
 
 private fun ClassGraph.acceptPackages(acceptedPackages: List<String>): ClassGraph {
-   for (acceptedPackage in acceptedPackages) {
-       acceptPackages(acceptedPackage)
-   }
+    for (acceptedPackage in acceptedPackages) {
+        acceptPackages(acceptedPackage)
+    }
     return this
 }
 
