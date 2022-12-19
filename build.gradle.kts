@@ -14,7 +14,7 @@ version = "1.0-SNAPSHOT"
 repositories { mavenCentral() }
 
 dependencies {
-    implementation("io.github.realyusufismail:ydwk:0.1.1")
+    implementation("io.github.realyusufismail:ydwk:0.1.2")
     implementation("io.github.classgraph:classgraph:4.8.152")
     testImplementation(kotlin("test"))
 }

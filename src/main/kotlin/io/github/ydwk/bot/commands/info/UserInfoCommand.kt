@@ -24,21 +24,29 @@ import io.github.ydwk.ydwk.entities.User
 import io.github.ydwk.ydwk.entities.guild.Member
 import io.github.ydwk.ydwk.entities.message.Embed
 import io.github.ydwk.ydwk.interaction.application.type.SlashCommand
+import io.github.ydwk.ydwk.interaction.message.ActionRow
+import io.github.ydwk.ydwk.interaction.message.button.Button
+import io.github.ydwk.ydwk.interaction.message.button.ButtonStyle
 import io.github.ydwk.ydwk.slash.SlashOption
 import io.github.ydwk.ydwk.slash.SlashOptionType
 
 class UserInfoCommand : SlashCommandExtender {
     override fun onSlashCommand(event: SlashCommand) {
-        val user: User? = event.getOption("user")?.asUser
-        val member: Member? = event.getOption("user")?.asMember
+        val member: Member? =
+            if (event.getOption("user")?.asMember == null) null
+            else event.getOption("user")?.asMember
         val slashMember = event.member
 
-        if (user != null) {
-            event.reply(userInfoEmbed(user, event))
-        } else if (member != null) {
-            event.reply(memberInfoEmbed(member, event))
+        if (member != null) {
+            event
+                .reply(memberInfoEmbed(member, event))
+                .addActionRow(ActionRow.of(Button.of(ButtonStyle.DANGER, "delete", "Delete")))
+                .trigger()
         } else {
-            event.reply(memberInfoEmbed(slashMember!!, event))
+            event
+                .reply(memberInfoEmbed(slashMember!!, event))
+                .addActionRow(ActionRow.of(Button.of(ButtonStyle.DANGER, "delete", "Delete")))
+                .trigger()
         }
     }
 
@@ -59,7 +67,7 @@ class UserInfoCommand : SlashCommandExtender {
         embed.setTitle(user.name + "#" + user.discriminator + "'s info")
         embed.setColor(defaultColor)
         embed.addField("User ID", user.id, true)
-        embed.addField("Bot", user.bot.toString(), true)
+        embed.addField("Bot", if (user.bot != null) "Yes" else "No", true)
         return embed.build()
     }
 
@@ -72,7 +80,7 @@ class UserInfoCommand : SlashCommandExtender {
     }
 
     override fun isGuildOnly(): Boolean {
-        return false
+        return true
     }
 
     override fun options(): MutableList<SlashOption> {

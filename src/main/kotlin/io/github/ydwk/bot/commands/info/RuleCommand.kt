@@ -69,7 +69,7 @@ class RuleCommand : SlashCommandExtender {
                     .trimIndent())
             .setColor(defaultColor)
 
-        event.reply(embed.build()).reply()
+        event.reply(embed.build()).trigger()
     }
 
     override fun name(): String {
