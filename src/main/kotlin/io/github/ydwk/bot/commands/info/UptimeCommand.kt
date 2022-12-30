@@ -44,7 +44,7 @@ class UptimeCommand : SlashCommandExtender {
         // send the message
         event
             .reply("Uptime: $formattedUptime")
-            .addActionRow(ActionRow.of(Button.of(ButtonStyle.DANGER, "delete", "Delete")))
+            .addActionRow(ActionRow(Button(ButtonStyle.DANGER, "delete", "Delete")))
             .trigger()
     }
 

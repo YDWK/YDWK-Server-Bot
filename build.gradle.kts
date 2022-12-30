@@ -11,11 +11,14 @@ group = "io.github.ydwk.bot"
 
 version = "1.0-SNAPSHOT"
 
-repositories { mavenCentral() }
+repositories {
+    mavenCentral()
+    maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+}
 
 dependencies {
-    implementation("io.github.realyusufismail:ydwk:0.1.2")
-    implementation("io.github.classgraph:classgraph:4.8.152")
+    implementation("io.github.realyusufismail:ydwk:1.0.0-SNAPSHOT")
+    implementation("io.github.classgraph:classgraph:4.8.153")
     testImplementation(kotlin("test"))
 }
 

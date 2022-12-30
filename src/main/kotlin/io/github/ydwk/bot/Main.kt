@@ -30,11 +30,11 @@ import org.slf4j.LoggerFactory
 
 val logger: Logger = LoggerFactory.getLogger("Main")
 
-fun main() {
+suspend fun main() {
     val token = JConfigUtils.getString("token") ?: throw Exception("Token not found")
     val ydwk: YDWK = createDefaultBot(token).build()
 
     ydwk.on<ReadyEvent> { logger.info("Bot is ready") }
 
-    ydwk.waitForReady.addEvent(AutoSlashAdder(ydwk), ButtonHandler())
+    ydwk.awaitReady().addEvent(AutoSlashAdder(ydwk), ButtonHandler())
 }

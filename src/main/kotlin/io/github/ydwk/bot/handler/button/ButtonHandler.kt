@@ -21,7 +21,7 @@ package io.github.ydwk.bot.handler.button
 import io.github.ydwk.ydwk.evm.ListenerAdapter
 import io.github.ydwk.ydwk.evm.event.events.interaction.button.ButtonClickEvent
 
-class ButtonHandler() : ListenerAdapter() {
+class ButtonHandler : ListenerAdapter() {
 
     override fun onButtonClick(event: ButtonClickEvent) {
         val button = event.button

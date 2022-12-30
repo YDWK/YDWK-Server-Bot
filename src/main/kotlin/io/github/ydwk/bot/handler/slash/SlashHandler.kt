@@ -20,9 +20,9 @@ package io.github.ydwk.bot.handler.slash
 
 import io.github.ydwk.bot.logger
 import io.github.ydwk.ydwk.YDWK
+import io.github.ydwk.ydwk.builders.slash.Slash
 import io.github.ydwk.ydwk.evm.ListenerAdapter
 import io.github.ydwk.ydwk.evm.event.events.interaction.slash.SlashCommandEvent
-import io.github.ydwk.ydwk.slash.Slash
 
 open class SlashHandler(private val ydwk: YDWK) : ListenerAdapter() {
     private val slashCommand: MutableMap<String, SlashCommandExtender> = HashMap()

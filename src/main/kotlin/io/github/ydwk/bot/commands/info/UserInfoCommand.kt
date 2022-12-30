@@ -20,6 +20,8 @@ package io.github.ydwk.bot.commands.info
 
 import io.github.ydwk.bot.commands.util.defaultColor
 import io.github.ydwk.bot.handler.slash.SlashCommandExtender
+import io.github.ydwk.ydwk.builders.slash.SlashOption
+import io.github.ydwk.ydwk.builders.slash.SlashOptionType
 import io.github.ydwk.ydwk.entities.User
 import io.github.ydwk.ydwk.entities.guild.Member
 import io.github.ydwk.ydwk.entities.message.Embed
@@ -27,8 +29,6 @@ import io.github.ydwk.ydwk.interaction.application.type.SlashCommand
 import io.github.ydwk.ydwk.interaction.message.ActionRow
 import io.github.ydwk.ydwk.interaction.message.button.Button
 import io.github.ydwk.ydwk.interaction.message.button.ButtonStyle
-import io.github.ydwk.ydwk.slash.SlashOption
-import io.github.ydwk.ydwk.slash.SlashOptionType
 
 class UserInfoCommand : SlashCommandExtender {
     override fun onSlashCommand(event: SlashCommand) {
@@ -40,12 +40,12 @@ class UserInfoCommand : SlashCommandExtender {
         if (member != null) {
             event
                 .reply(memberInfoEmbed(member, event))
-                .addActionRow(ActionRow.of(Button.of(ButtonStyle.DANGER, "delete", "Delete")))
+                .addActionRow(ActionRow(Button(ButtonStyle.DANGER, "delete", "Delete")))
                 .trigger()
         } else {
             event
                 .reply(memberInfoEmbed(slashMember!!, event))
-                .addActionRow(ActionRow.of(Button.of(ButtonStyle.DANGER, "delete", "Delete")))
+                .addActionRow(ActionRow(Button(ButtonStyle.DANGER, "delete", "Delete")))
                 .trigger()
         }
     }
