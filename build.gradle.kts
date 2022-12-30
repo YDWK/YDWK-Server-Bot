@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-    implementation("io.github.realyusufismail:ydwk:1.0.0-SNAPSHOT")
+    implementation("io.github.realyusufismail:ydwk:1.22.0")
     implementation("io.github.classgraph:classgraph:4.8.153")
     testImplementation(kotlin("test"))
 }
