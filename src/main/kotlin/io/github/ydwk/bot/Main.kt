@@ -32,7 +32,9 @@ val logger: Logger = LoggerFactory.getLogger("Main")
 
 suspend fun main() {
     val token = JConfigUtils.getString("token") ?: throw Exception("Token not found")
-    val ydwk: YDWK = createDefaultBot(token).build()
+    val ydwk: YDWK = createDefaultBot(token)
+        .setETFInsteadOfJson(true)
+        .build()
 
     ydwk.on<ReadyEvent> { logger.info("Bot is ready") }
 

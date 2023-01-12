@@ -32,24 +32,24 @@ class BanCommand : SlashCommandExtender {
         val bot: Member = event.ydwk.getMemberById(event.guild?.id!!, event.ydwk.bot?.id!!)!!
 
         if (!member.hasPermission(GuildPermission.BAN_MEMBERS)) {
-            event.reply("You do not have permission to ban members.").isEphemeral(true).trigger()
+            event.reply("You do not have permission to ban members.").setEphemeral(true).trigger()
             return
         }
 
         if (!bot.hasPermission(GuildPermission.BAN_MEMBERS)) {
-            event.reply("I do not have permission to ban members.").isEphemeral(true).trigger()
+            event.reply("I do not have permission to ban members.").setEphemeral(true).trigger()
             return
         }
 
         val user: User? = event.getOption("user")?.asUser
         if (user == null) {
-            event.reply("You must provide a user to ban.").isEphemeral(true).trigger()
+            event.reply("You must provide a user to ban.").setEphemeral(true).trigger()
             return
         }
 
         val reason: String? = event.getOption("reason")?.asString
         if (reason == null) {
-            event.reply("You must provide a reason to ban.").isEphemeral(true).trigger()
+            event.reply("You must provide a reason to ban.").setEphemeral(true).trigger()
             return
         }
 
