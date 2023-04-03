@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.7.22"
+    kotlin("jvm") version "1.8.20"
     id("com.diffplug.spotless") version "6.12.0"
     application
     jacoco // code coverage reports
