@@ -18,16 +18,16 @@
  */ 
 package io.github.ydwk.bot.handler.button
 
-import io.github.ydwk.ydwk.evm.ListenerAdapter
 import io.github.ydwk.ydwk.evm.event.events.interaction.button.ButtonClickEvent
+import io.github.ydwk.ydwk.evm.listeners.InteractionEventListener
 
-class ButtonHandler : ListenerAdapter() {
+class ButtonHandler : InteractionEventListener {
 
-    override fun onButtonClick(event: ButtonClickEvent) {
+    override fun onButtonClickEvent(event: ButtonClickEvent) {
         val button = event.button
         when (button.customId) {
             "delete" -> {
-                button.message.delete().get()
+                button.message.delete().getCompleted()
             }
         }
     }

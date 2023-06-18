@@ -19,14 +19,14 @@
 package io.github.ydwk.bot.handler.slash
 
 import io.github.ydwk.bot.logger
+import io.github.ydwk.yde.builders.slash.SlashCommandBuilder
 import io.github.ydwk.ydwk.YDWK
-import io.github.ydwk.ydwk.builders.slash.Slash
-import io.github.ydwk.ydwk.evm.ListenerAdapter
 import io.github.ydwk.ydwk.evm.event.events.interaction.slash.SlashCommandEvent
+import io.github.ydwk.ydwk.evm.listeners.InteractionEventListener
 
-open class SlashHandler(private val ydwk: YDWK) : ListenerAdapter() {
+open class SlashHandler(private val ydwk: YDWK) : InteractionEventListener {
     private val slashCommand: MutableMap<String, SlashCommandExtender> = HashMap()
-    private val slashMutableList: MutableList<Slash> = ArrayList()
+    private val slashMutableList: MutableList<SlashCommandBuilder> = ArrayList()
 
     private fun addSlashCommands(command: SlashCommandExtender) {
         if (command.name().isEmpty()) {
@@ -36,10 +36,10 @@ open class SlashHandler(private val ydwk: YDWK) : ListenerAdapter() {
         slashCommand[command.name()] = command
         if (command.isGuildOnly()) {
             slashMutableList.add(
-                Slash(command.name(), command.description(), true).addOptions(command.options()))
+                SlashCommandBuilder(command.name(), command.description(), true).addOptions(command.options()))
         } else {
             slashMutableList.add(
-                Slash(command.name(), command.description(), false).addOptions(command.options()))
+                SlashCommandBuilder(command.name(), command.description(), false).addOptions(command.options()))
         }
     }
 
@@ -56,7 +56,7 @@ open class SlashHandler(private val ydwk: YDWK) : ListenerAdapter() {
         }
     }
 
-    override fun onSlashCommand(event: SlashCommandEvent) {
+    override fun onSlashCommandEvent(event: SlashCommandEvent) {
         slashCommand.forEach { (name, cmd) ->
             if (name == event.slash.name) {
                 cmd.onSlashCommand(event.slash)

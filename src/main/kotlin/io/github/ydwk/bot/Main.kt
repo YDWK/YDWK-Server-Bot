@@ -23,8 +23,6 @@ import io.github.ydwk.bot.handler.button.ButtonHandler
 import io.github.ydwk.bot.handler.slash.AutoSlashAdder
 import io.github.ydwk.ydwk.BotBuilder.createDefaultBot
 import io.github.ydwk.ydwk.YDWK
-import io.github.ydwk.ydwk.evm.backend.event.on
-import io.github.ydwk.ydwk.evm.event.events.gateway.ReadyEvent
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -36,7 +34,7 @@ suspend fun main() {
         .setETFInsteadOfJson(true)
         .build()
 
-    ydwk.on<ReadyEvent> { logger.info("Bot is ready") }
+    ydwk.eventListener.onReadyEvent { logger.info("Bot is ready") }
 
-    ydwk.awaitReady().addEvent(AutoSlashAdder(ydwk), ButtonHandler())
+    ydwk.awaitReady().addEventListeners(AutoSlashAdder(ydwk), ButtonHandler())
 }

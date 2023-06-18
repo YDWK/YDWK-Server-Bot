@@ -19,10 +19,12 @@
 package io.github.ydwk.bot.commands.info
 
 import io.github.ydwk.bot.handler.slash.SlashCommandExtender
-import io.github.ydwk.ydwk.interaction.application.type.SlashCommand
-import io.github.ydwk.ydwk.interaction.message.ActionRow
-import io.github.ydwk.ydwk.interaction.message.button.Button
-import io.github.ydwk.ydwk.interaction.message.button.ButtonStyle
+import io.github.ydwk.yde.interaction.application.type.SlashCommand
+import io.github.ydwk.yde.interaction.message.ActionRow
+import io.github.ydwk.yde.interaction.message.button.Button
+import io.github.ydwk.yde.interaction.message.button.ButtonStyle
+import io.github.ydwk.ydwk.util.ydwk
+import kotlinx.coroutines.runBlocking
 import java.time.Duration
 import java.time.Instant
 
@@ -41,11 +43,13 @@ class UptimeCommand : SlashCommandExtender {
         // format it where you have the days, hours, minutes, seconds
         val formattedUptime = formatUptime(duration)
 
-        // send the message
-        event
-            .reply("Uptime: $formattedUptime")
-            .addActionRow(ActionRow(Button(ButtonStyle.DANGER, "delete", "Delete")))
-            .trigger()
+        runBlocking {
+            // send the message
+            event
+                .reply("Uptime: $formattedUptime")
+                .addActionRow(ActionRow(Button(ButtonStyle.DANGER, "delete", "Delete")))
+                .trigger()
+        }
     }
 
     override fun name(): String {

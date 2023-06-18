@@ -18,8 +18,8 @@
  */ 
 package io.github.ydwk.bot.handler.slash
 
-import io.github.ydwk.ydwk.builders.slash.SlashOption
-import io.github.ydwk.ydwk.interaction.application.type.SlashCommand
+import io.github.ydwk.yde.builders.slash.SlashOption
+import io.github.ydwk.yde.interaction.application.type.SlashCommand
 
 interface SlashCommandExtender {
 

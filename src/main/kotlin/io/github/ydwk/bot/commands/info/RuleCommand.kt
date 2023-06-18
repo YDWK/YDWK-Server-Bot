@@ -20,11 +20,12 @@ package io.github.ydwk.bot.commands.info
 
 import io.github.ydwk.bot.commands.util.defaultColor
 import io.github.ydwk.bot.handler.slash.SlashCommandExtender
-import io.github.ydwk.ydwk.interaction.application.type.SlashCommand
+import io.github.ydwk.yde.interaction.application.type.SlashCommand
+import kotlinx.coroutines.runBlocking
 
 class RuleCommand : SlashCommandExtender {
     override fun onSlashCommand(event: SlashCommand) {
-        val embed = event.ydwk.embedBuilder
+        val embed = event.yde.embedBuilder
         embed.setTitle("YDWK Rules")
         embed
             .setDescription(
@@ -69,7 +70,10 @@ class RuleCommand : SlashCommandExtender {
                     .trimIndent())
             .setColor(defaultColor)
 
-        event.reply(embed.build()).trigger()
+
+        runBlocking {
+            event.reply(embed.build()).trigger()
+        }
     }
 
     override fun name(): String {

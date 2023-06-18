@@ -1,8 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.7.22"
-    id("com.diffplug.spotless") version "6.12.0"
+    kotlin("jvm") version "1.8.22"
+    id("com.diffplug.spotless") version "6.19.0"
     application
     jacoco // code coverage reports
 }
@@ -13,12 +13,11 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
-    maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
 }
 
 dependencies {
-    implementation("io.github.realyusufismail:ydwk:1.0.5")
-    implementation("io.github.classgraph:classgraph:4.8.154")
+    implementation("io.github.realyusufismail:ydwk:1.6.5")
+    implementation("io.github.classgraph:classgraph:4.8.160")
     testImplementation(kotlin("test"))
 }
 
@@ -75,6 +74,6 @@ spotless {
     }
 }
 
-tasks.withType<KotlinCompile> { kotlinOptions.jvmTarget = "17" }
+tasks.withType<KotlinCompile> { kotlinOptions.jvmTarget = "11" }
 
 application { mainClass.set("Main") }
