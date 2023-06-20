@@ -45,9 +45,14 @@ class UserInfoCommand : SlashCommandExtender {
                     .reply(memberInfoEmbed(member, event))
                     .addActionRow(ActionRow(Button(ButtonStyle.DANGER, "delete", "Delete")))
                     .trigger()
+            } else if (slashMember != null) {
+                event
+                    .reply(memberInfoEmbed(slashMember, event))
+                    .addActionRow(ActionRow(Button(ButtonStyle.DANGER, "delete", "Delete")))
+                    .trigger()
             } else {
                 event
-                    .reply(memberInfoEmbed(slashMember!!, event))
+                    .reply(userInfoEmbed(event.user, event))
                     .addActionRow(ActionRow(Button(ButtonStyle.DANGER, "delete", "Delete")))
                     .trigger()
             }
@@ -56,7 +61,7 @@ class UserInfoCommand : SlashCommandExtender {
 
     private fun memberInfoEmbed(member: Member, event: SlashCommand): Embed {
         val embed = event.ydwk.embedBuilder
-        embed.setTitle(member.user.name + "#" + member.user.discriminator + "'s info")
+        embed.setTitle("""${member.user.name}'s info""")
         embed.setColor(defaultColor)
         embed.addField("User ID", member.user.id, true)
         embed.addField("Nickname", member.nick ?: "None", true)
@@ -68,7 +73,7 @@ class UserInfoCommand : SlashCommandExtender {
 
     private fun userInfoEmbed(user: User, event: SlashCommand): Embed {
         val embed = event.ydwk.embedBuilder
-        embed.setTitle(user.name + "#" + user.discriminator + "'s info")
+        embed.setTitle("""${user.name}'s info""")
         embed.setColor(defaultColor)
         embed.addField("User ID", user.id, true)
         embed.addField("Bot", if (user.bot != null) "Yes" else "No", true)
