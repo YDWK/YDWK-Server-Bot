@@ -17,7 +17,7 @@ repositories {
 
 dependencies {
     implementation("io.github.realyusufismail:ydwk:1.7.0")
-    implementation("io.github.classgraph:classgraph:4.8.160")
+    implementation("io.github.classgraph:classgraph:4.8.161")
     testImplementation(kotlin("test"))
 }
 
