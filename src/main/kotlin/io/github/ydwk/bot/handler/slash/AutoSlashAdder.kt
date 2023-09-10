@@ -24,7 +24,7 @@ import io.github.ydwk.ydwk.YDWK
 
 class AutoSlashAdder(ydwk: YDWK) : SlashHandler(ydwk) {
     private fun loadCommands(): List<Class<out SlashCommandExtender>> {
-        ClassGraph().acceptPackages(acceptedPackages()).enableClassInfo().scan().use { result ->
+        ClassGraph().enableClassInfo().scan().use { result ->
             return result.allClasses
                 .filter { it.implementsInterface(SlashCommandExtender::class.java) }
                 .mapNotNull { classInfo ->
@@ -45,10 +45,4 @@ private fun ClassGraph.acceptPackages(acceptedPackages: List<String>): ClassGrap
         acceptPackages(acceptedPackage)
     }
     return this
-}
-
-fun acceptedPackages(): List<String> {
-    val mainPackageName = "io.github.ydwk.bot.commands"
-    val subPackages = listOf("info", "moderation")
-    return listOf(mainPackageName) + subPackages.map { "$mainPackageName.$it" }
 }

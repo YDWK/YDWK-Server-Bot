@@ -11,12 +11,10 @@ group = "io.github.ydwk.bot"
 
 version = "1.0-SNAPSHOT"
 
-repositories {
-    mavenCentral()
-}
+repositories { mavenCentral() }
 
 dependencies {
-    implementation("io.github.realyusufismail:ydwk:1.7.0")
+    implementation("io.github.realyusufismail:ydwk:1.8.0")
     implementation("io.github.classgraph:classgraph:4.8.160")
     testImplementation(kotlin("test"))
 }

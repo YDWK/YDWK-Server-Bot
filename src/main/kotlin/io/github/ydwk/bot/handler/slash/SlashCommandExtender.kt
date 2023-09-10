@@ -23,7 +23,7 @@ import io.github.ydwk.yde.interaction.application.type.SlashCommand
 
 interface SlashCommandExtender {
 
-    fun onSlashCommand(event: SlashCommand)
+    suspend fun onSlashCommand(event: SlashCommand)
 
     fun name(): String
 

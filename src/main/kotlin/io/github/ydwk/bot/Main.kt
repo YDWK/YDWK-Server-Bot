@@ -19,8 +19,8 @@
 package io.github.ydwk.bot
 
 import io.github.realyusufismail.jconfig.util.JConfigUtils
-import io.github.ydwk.bot.handler.button.ButtonHandler
 import io.github.ydwk.bot.handler.slash.AutoSlashAdder
+import io.github.ydwk.bot.handler.slash.SlashHandler
 import io.github.ydwk.ydwk.BotBuilder.createDefaultBot
 import io.github.ydwk.ydwk.YDWK
 import org.slf4j.Logger
@@ -30,11 +30,26 @@ val logger: Logger = LoggerFactory.getLogger("Main")
 
 suspend fun main() {
     val token = JConfigUtils.getString("token") ?: throw Exception("Token not found")
-    val ydwk: YDWK = createDefaultBot(token)
-        .setETFInsteadOfJson(true)
-        .build()
+    val ydwk: YDWK = createDefaultBot(token).setETFInsteadOfJson(true).build()
 
     ydwk.eventListener.onReadyEvent { logger.info("Bot is ready") }
 
-    ydwk.awaitReady().addEventListeners(AutoSlashAdder(ydwk), ButtonHandler())
+    ydwk.eventListener.onButtonClickEvent {
+        val button = it.button
+        when (button.customId) {
+            "delete" -> {
+                button.message.delete()
+                    .await()
+            }
+        }
+    }
+
+    ydwk.eventListener.onSlashCommandEvent {
+        val handler = SlashHandler(ydwk)
+        handler.slashCommand.forEach { (name, cmd) ->
+            if (name == it.slash.name) {
+                cmd.onSlashCommand(it.slash)
+            }
+        }
+    }
 }

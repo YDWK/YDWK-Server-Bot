@@ -25,40 +25,36 @@ import io.github.ydwk.yde.entities.guild.Member
 import io.github.ydwk.yde.entities.guild.enums.GuildPermission
 import io.github.ydwk.yde.interaction.application.type.SlashCommand
 import io.github.ydwk.ydwk.util.ydwk
-import kotlinx.coroutines.runBlocking
 
 class KickCommand : SlashCommandExtender {
-    override fun onSlashCommand(event: SlashCommand) {
+    override suspend fun onSlashCommand(event: SlashCommand) {
         val member: Member = event.member!!
         val bot: Member = event.ydwk.getMemberById(event.guild?.id!!, event.ydwk.bot?.id!!)!!
         val user: Member? = event.getOption("user")?.asMember
         val reason: String? = event.getOption("reason")?.asString
 
-        runBlocking {
+        if (!member.hasPermission(GuildPermission.KICK_MEMBERS)) {
+            event.reply("You do not have permission to kick members.").setEphemeral(true).trigger()
+            return
+        }
 
-            if (!member.hasPermission(GuildPermission.KICK_MEMBERS)) {
-                event.reply("You do not have permission to kick members.").setEphemeral(true).trigger()
-                return@runBlocking
-            }
+        if (!bot.hasPermission(GuildPermission.KICK_MEMBERS)) {
+            event.reply("I do not have permission to kick members.").setEphemeral(true).trigger()
+            return
+        }
 
-            if (!bot.hasPermission(GuildPermission.KICK_MEMBERS)) {
-                event.reply("I do not have permission to kick members.").setEphemeral(true).trigger()
-                return@runBlocking
-            }
+        if (user == null) {
+            event.reply("You must provide a member to kick.").setEphemeral(true).trigger()
+            return
+        }
 
-            if (user == null) {
-                event.reply("You must provide a member to kick.").setEphemeral(true).trigger()
-                return@runBlocking
-            }
+        if (reason == null) {
+            event.reply("You must provide a reason to kick.").setEphemeral(true).trigger()
+            return
+        }
 
-            if (reason == null) {
-                event.reply("You must provide a reason to kick.").setEphemeral(true).trigger()
-                return@runBlocking
-            }
-
-            event.guild!!.kickMember(user.id, reason).await().let {
-                event.reply("Kicked ${user.name}#${user.user.discriminator} for $reason.").trigger()
-            }
+        event.guild!!.kickMember(user.id, reason).await().let {
+            event.reply("Kicked ${user.name}#${user.user.discriminator} for $reason.").trigger()
         }
     }
 

@@ -24,8 +24,8 @@ import io.github.ydwk.ydwk.YDWK
 import io.github.ydwk.ydwk.evm.event.events.interaction.slash.SlashCommandEvent
 import io.github.ydwk.ydwk.evm.listeners.InteractionEventListener
 
-open class SlashHandler(private val ydwk: YDWK) : InteractionEventListener {
-    private val slashCommand: MutableMap<String, SlashCommandExtender> = HashMap()
+open class SlashHandler(private val ydwk: YDWK) {
+    val slashCommand: MutableMap<String, SlashCommandExtender> = HashMap()
     private val slashMutableList: MutableList<SlashCommandBuilder> = ArrayList()
 
     private fun addSlashCommands(command: SlashCommandExtender) {
@@ -36,10 +36,12 @@ open class SlashHandler(private val ydwk: YDWK) : InteractionEventListener {
         slashCommand[command.name()] = command
         if (command.isGuildOnly()) {
             slashMutableList.add(
-                SlashCommandBuilder(command.name(), command.description(), true).addOptions(command.options()))
+                SlashCommandBuilder(command.name(), command.description(), true)
+                    .addOptions(command.options()))
         } else {
             slashMutableList.add(
-                SlashCommandBuilder(command.name(), command.description(), false).addOptions(command.options()))
+                SlashCommandBuilder(command.name(), command.description(), false)
+                    .addOptions(command.options()))
         }
     }
 
@@ -53,14 +55,6 @@ open class SlashHandler(private val ydwk: YDWK) : InteractionEventListener {
             ydwk.slashBuilder.addSlashCommands(slashMutableList).build()
         } else {
             logger.warn("No slash commands registered")
-        }
-    }
-
-    override fun onSlashCommandEvent(event: SlashCommandEvent) {
-        slashCommand.forEach { (name, cmd) ->
-            if (name == event.slash.name) {
-                cmd.onSlashCommand(event.slash)
-            }
         }
     }
 }

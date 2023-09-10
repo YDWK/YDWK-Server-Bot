@@ -30,32 +30,29 @@ import io.github.ydwk.yde.interaction.message.ActionRow
 import io.github.ydwk.yde.interaction.message.button.Button
 import io.github.ydwk.yde.interaction.message.button.ButtonStyle
 import io.github.ydwk.ydwk.util.ydwk
-import kotlinx.coroutines.runBlocking
 
 class UserInfoCommand : SlashCommandExtender {
-    override fun onSlashCommand(event: SlashCommand) {
+    override suspend fun onSlashCommand(event: SlashCommand) {
         val member: Member? =
             if (event.getOption("user")?.asMember == null) null
             else event.getOption("user")?.asMember
         val slashMember = event.member
 
-        runBlocking {
-            if (member != null) {
-                event
-                    .reply(memberInfoEmbed(member, event))
-                    .addActionRow(ActionRow(Button(ButtonStyle.DANGER, "delete", "Delete")))
-                    .trigger()
-            } else if (slashMember != null) {
-                event
-                    .reply(memberInfoEmbed(slashMember, event))
-                    .addActionRow(ActionRow(Button(ButtonStyle.DANGER, "delete", "Delete")))
-                    .trigger()
-            } else {
-                event
-                    .reply(userInfoEmbed(event.user, event))
-                    .addActionRow(ActionRow(Button(ButtonStyle.DANGER, "delete", "Delete")))
-                    .trigger()
-            }
+        if (member != null) {
+            event
+                .reply(memberInfoEmbed(member, event))
+                .addActionRow(ActionRow(Button(ButtonStyle.DANGER, "delete", "Delete")))
+                .trigger()
+        } else if (slashMember != null) {
+            event
+                .reply(memberInfoEmbed(slashMember, event))
+                .addActionRow(ActionRow(Button(ButtonStyle.DANGER, "delete", "Delete")))
+                .trigger()
+        } else {
+            event
+                .reply(userInfoEmbed(event.user, event))
+                .addActionRow(ActionRow(Button(ButtonStyle.DANGER, "delete", "Delete")))
+                .trigger()
         }
     }
 
