@@ -16,20 +16,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */ 
-package io.github.ydwk.bot.handler.slash
+package io.github.ydwk.bot.commands
 
-import io.github.ydwk.yde.builders.slash.SlashOption
+import io.github.ydwk.bot.annotation.Slash
+import io.github.ydwk.bot.builder.SlashBuildResult
+import io.github.ydwk.bot.builder.SlashBuilder
+import io.github.ydwk.bot.extenders.ISlashCommandExtender
 import io.github.ydwk.yde.interaction.application.type.SlashCommand
+import io.github.ydwk.ydwk.util.ydwk
 
-interface SlashCommandExtender {
+@Slash
+class Ping : ISlashCommandExtender {
+    override suspend fun onIncomingSlashCommand(slashCommand: SlashCommand) {
+        slashCommand.reply("The bots ping is " + slashCommand.ydwk.uptime).trigger()
+    }
 
-    suspend fun onSlashCommand(event: SlashCommand)
-
-    fun name(): String
-
-    fun description(): String
-
-    fun isGuildOnly(): Boolean
-
-    fun options(): MutableList<SlashOption> = mutableListOf()
+    override val slashCommandBuilder: SlashBuildResult
+        get() = SlashBuilder("ping", "Used to get the bots ping").build()
 }

@@ -16,9 +16,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */ 
-package io.github.ydwk.bot.commands.util
+package io.github.ydwk.bot.handle
 
-import java.awt.Color
+import io.github.ydwk.ydwk.YDWK
+import io.github.ydwk.ydwk.evm.event.events.interaction.slash.SlashCommandEvent
 
-// rgb
-val defaultColor = Color(85, 17, 238)
+fun handleEvents(ydwk: YDWK) {
+
+    ydwk.eventListener.on<SlashCommandEvent> {}
+}

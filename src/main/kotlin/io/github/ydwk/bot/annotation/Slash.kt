@@ -16,17 +16,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */ 
-package io.github.ydwk.bot
+package io.github.ydwk.bot.annotation
 
-import io.github.realyusufismail.jconfig.util.JConfigUtils
-import io.github.ydwk.ydwk.BotBuilder.createDefaultBot
-import io.github.ydwk.ydwk.YDWK
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
-
-val logger: Logger = LoggerFactory.getLogger("JavaExample")
-
-fun main() {
-    val token = JConfigUtils.getString("token") ?: throw Exception("Token not found")
-    val ydwk: YDWK = createDefaultBot(token).setETFInsteadOfJson(true).build()
-}
+/**
+ * Represents the Slash annotation. This annotation can be used to mark classes, functions, or
+ * properties as belonging to the Slash group. Use this annotation to provide additional information
+ * or metadata for the Slash group.
+ */
+annotation class Slash()

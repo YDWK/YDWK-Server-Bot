@@ -16,36 +16,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */ 
-package io.github.ydwk.bot.handler.slash
+package io.github.ydwk.bot.handle
 
+import io.github.ydwk.bot.extenders.ISlashCommandExtender
 import io.github.ydwk.bot.logger
 import io.github.ydwk.yde.builders.slash.SlashCommandBuilder
 import io.github.ydwk.ydwk.YDWK
-import io.github.ydwk.ydwk.evm.event.events.interaction.slash.SlashCommandEvent
-import io.github.ydwk.ydwk.evm.listeners.InteractionEventListener
 
 open class SlashHandler(private val ydwk: YDWK) {
-    val slashCommand: MutableMap<String, SlashCommandExtender> = HashMap()
+    private val slashCommand: MutableMap<String, ISlashCommandExtender> = HashMap()
     private val slashMutableList: MutableList<SlashCommandBuilder> = ArrayList()
-
-    private fun addSlashCommands(command: SlashCommandExtender) {
-        if (command.name().isEmpty()) {
-            throw IllegalArgumentException("SlashCommandExtender name cannot be null")
-        }
-
-        slashCommand[command.name()] = command
-        if (command.isGuildOnly()) {
+    private fun addSlashCommands(command: ISlashCommandExtender) {
+        slashCommand[command.slashCommandBuilder.name] = command
+        if (command.slashCommandBuilder.guildOnly) {
             slashMutableList.add(
-                SlashCommandBuilder(command.name(), command.description(), true)
-                    .addOptions(command.options()))
+                SlashCommandBuilder(
+                        command.slashCommandBuilder.name,
+                        command.slashCommandBuilder.description,
+                        true)
+                    .addOptions(command.slashCommandBuilder.options))
         } else {
             slashMutableList.add(
-                SlashCommandBuilder(command.name(), command.description(), false)
-                    .addOptions(command.options()))
+                SlashCommandBuilder(
+                        command.slashCommandBuilder.name,
+                        command.slashCommandBuilder.description,
+                        false)
+                    .addOptions(command.slashCommandBuilder.options))
         }
     }
 
-    fun registerSlashCommands(slashCommands: Collection<SlashCommandExtender>): SlashHandler {
+    fun registerSlashCommands(slashCommands: Collection<ISlashCommandExtender>): SlashHandler {
         slashCommands.forEach { addSlashCommands(it) }
         return this
     }
