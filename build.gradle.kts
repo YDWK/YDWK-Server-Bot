@@ -15,7 +15,7 @@ repositories { mavenCentral() }
 
 dependencies {
     implementation("io.github.realyusufismail:ydwk:1.8.0")
-    implementation("io.github.classgraph:classgraph:4.8.160")
+    implementation("io.github.classgraph:classgraph:4.8.163")
     testImplementation(kotlin("test"))
 }
 
